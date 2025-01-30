@@ -15,9 +15,12 @@ import javax.swing.ImageIcon;
 import javax.swing.JFrame;
 import javax.swing.JLabel;
 import javax.swing.JPanel;
+import javax.swing.JTextArea;
 import javax.swing.SwingConstants;
 import javax.swing.SwingUtilities;
 import javax.swing.border.LineBorder;
+
+import javax.swing.JTextField;
 
 import BusinessLogic.PiezaDeArteBL;
 import GUI.Styles;
@@ -30,6 +33,8 @@ public class EscaneoPinturaPanel extends JPanel {
     private JLabel priceLabel;
     private JLabel autroLabel;
     private JLabel descripcionLabel;
+
+
 
     private MenuPanel menuPanel;
 
@@ -194,23 +199,23 @@ public class EscaneoPinturaPanel extends JPanel {
         colocarImagenPieza(ubicacion);
 
         // try {
-        //     String nombre = piezabl.getNombreBy(barcode);
-        //     String precio = piezabl.getPrecioBy(barcode);
-        //     String autor = piezabl.getAutorBy(barcode);
-        //     String descripcion = piezabl.getDescripcionBy(barcode);
+        // String nombre = piezabl.getNombreBy(barcode);
+        // String precio = piezabl.getPrecioBy(barcode);
+        // String autor = piezabl.getAutorBy(barcode);
+        // String descripcion = piezabl.getDescripcionBy(barcode);
 
-        //     String imgPintura = piezabl.getNombreBy(barcode);
-        //     String ubicacion = "/GUI/Resource/Imagenes/" + imgPintura + ".jpg";
+        // String imgPintura = piezabl.getNombreBy(barcode);
+        // String ubicacion = "/GUI/Resource/Imagenes/" + imgPintura + ".jpg";
 
-        //     nameLabel.setText("Nombre de la Pieza: " + nombre + "\n");
-        //     priceLabel.setText("Precio Replica: " + precio + "\n");
-        //     autroLabel.setText("Autor: " + autor + "\n");
-        //     descripcionLabel.setText("Descripción: " + descripcion + "\n");
-        //     System.out.println(ubicacion);
-        //     colocarImagenPieza(ubicacion);
+        // nameLabel.setText("Nombre de la Pieza: " + nombre + "\n");
+        // priceLabel.setText("Precio Replica: " + precio + "\n");
+        // autroLabel.setText("Autor: " + autor + "\n");
+        // descripcionLabel.setText("Descripción: " + descripcion + "\n");
+        // System.out.println(ubicacion);
+        // colocarImagenPieza(ubicacion);
         // } catch (Exception e) {
-        //     // colocarImagenPieza();
-        //     System.out.println("hay un problema en el process bar");
+        // // colocarImagenPieza();
+        // System.out.println("hay un problema en el process bar");
         // }
 
     }
