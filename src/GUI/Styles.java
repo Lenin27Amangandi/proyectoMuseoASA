@@ -31,7 +31,7 @@ public abstract class Styles {
 
     public static final Font FONT = new Font("Inconsolata", Font.PLAIN, 14);
     public static final Font FONT_BOLD = new Font("Inconsolata", Font.BOLD | Font.PLAIN, 14);
-    public static final Font FONT_BOLD_24 = new Font("Inconsolata", Font.BOLD| Font.PLAIN, 24);
+    public static final Font FONT_BOLD_20 = new Font("Inconsolata", Font.BOLD| Font.PLAIN, 20);
     public static final Font FONT_SMALL = new Font("Inconsolata", Font.PLAIN | Font.PLAIN, 10);
 
     public static final int ALIGNMENT_LEFT = SwingConstants.LEFT;

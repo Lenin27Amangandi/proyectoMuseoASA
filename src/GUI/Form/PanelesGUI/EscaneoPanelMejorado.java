@@ -29,7 +29,7 @@ public class EscaneoPanelMejorado extends JPanel {
         setBackground(Styles.COLOR_BACKGROUND);
 
         // Creación de los componentes
-        nameLabel = new JLabel("Esperando a que escanee el código del producto...", SwingConstants.CENTER);
+        nameLabel = new JLabel("Esperando a que escanee el código de la Pieza ...", SwingConstants.CENTER);
         nameLabel.setFont(Styles.FONT);
         nameLabel.setForeground(Color.BLACK);
         nameLabel.setBorder(new LineBorder(Color.BLACK, 2));
@@ -134,7 +134,6 @@ public class EscaneoPanelMejorado extends JPanel {
                 barcodeField.setText("");
             }
         });
-
         // Focus inicial en el campo de texto
         SwingUtilities.invokeLater(() -> barcodeField.requestFocusInWindow());
     }

@@ -3,6 +3,7 @@ package GUI.CustomerControl;
 import java.awt.Color;
 import java.awt.Font;
 
+import javax.swing.ImageIcon;
 import javax.swing.JLabel;
 import javax.swing.text.Style;
 
@@ -30,6 +31,6 @@ public class PrjLabel extends JLabel {
         setBackground(null);
         setForeground(Styles.COLOR_FOREGROUND);
         setHorizontalAlignment(alignment);
-        // setIcon(new ImageIcon(iconPath));
+        //setIcon(new ImageIcon(iconPath));
     }
 }

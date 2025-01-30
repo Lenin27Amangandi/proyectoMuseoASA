@@ -42,15 +42,15 @@ public class EscaneoPanel extends JPanel {
         nameLabel.setForeground(Styles.COLOR_FOREGROUND);
 
         priceLabel = new JLabel("...", SwingConstants.CENTER);
-        priceLabel.setFont(Styles.FONT_BOLD_24);
+        priceLabel.setFont(Styles.FONT_BOLD_20);
         priceLabel.setForeground(Styles.COLOR_FOREGROUND);
 
         autorLabel = new JLabel("...", SwingConstants.CENTER);
-        autorLabel.setFont(Styles.FONT_BOLD_24);
+        autorLabel.setFont(Styles.FONT_BOLD_20);
         autorLabel.setForeground(Styles.COLOR_FOREGROUND);
 
         descripcionLabel = new JLabel("...", SwingConstants.CENTER);
-        descripcionLabel.setFont(Styles.FONT_BOLD_24);
+        descripcionLabel.setFont(Styles.FONT_BOLD_20);
         descripcionLabel.setForeground(Styles.COLOR_FOREGROUND);
 
 
