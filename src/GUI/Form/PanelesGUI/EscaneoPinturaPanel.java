@@ -34,14 +34,12 @@ public class EscaneoPinturaPanel extends JPanel {
     private JLabel autroLabel;
     private JLabel descripcionLabel;
 
+    private JTextArea descripcionArea;
 
-
+    private URL URL_Pieza;
     private MenuPanel menuPanel;
-
     private PrjButton btnHome;
-
     private PiezaDeArteBL piezabl = new PiezaDeArteBL();
-
     public PrjTextBox barcodeField;
 
     public EscaneoPinturaPanel(MenuPanel menuPanel) {
@@ -72,6 +70,7 @@ public class EscaneoPinturaPanel extends JPanel {
         autroLabel.setOpaque(false);
 
         descripcionLabel = new JLabel("Descripcion ...", SwingConstants.LEFT);
+        // descripcionLabel = new JLabel("<html><body style='width: 300px;'>" + "Descripcion ..." + "</body></html>", SwingConstants.LEFT);
         descripcionLabel.setFont(Styles.FONT_BOLD);
         descripcionLabel.setForeground(Color.BLACK); // Ponemos el color de la letra
         descripcionLabel.setBounds(40, 190, 300, 100);
@@ -104,37 +103,21 @@ public class EscaneoPinturaPanel extends JPanel {
             getBarcode();
         });
 
-        SwingUtilities.invokeLater(() -> barcodeField.requestFocusInWindow());
 
+
+        SwingUtilities.invokeLater(() -> barcodeField.requestFocusInWindow());
         // colocarImagenPieza();
 
     }
 
-    private void colocarImagenPieza() {
-        ImageIcon icon = new ImageIcon(Styles.URL_LOGO);
-        ImageIcon scaledIcon = new ImageIcon(icon.getImage().getScaledInstance(240, 240, java.awt.Image.SCALE_SMOOTH));
-        JLabel logo = new JLabel(scaledIcon);
-
-        logo.setBounds(410, 120, 200, 200);
-        add(logo);
-    }
-
-    private URL URL_Pieza;
-
-    // private void colocarImagenPieza(String nombrePieza) {
-    // try {
-    // String img = nombrePieza;
-    // URL_Pieza = Styles.class.getResource(img);
-    // ImageIcon icon = new ImageIcon(URL_Pieza);
-    // ImageIcon scaledIcon = new ImageIcon(
-    // icon.getImage().getScaledInstance(240, 240, java.awt.Image.SCALE_SMOOTH));
-    // JLabel logo = new JLabel(scaledIcon);
-    // logo.setBounds(410, 120, 200, 200);
-    // add(logo);
-    // } catch (Exception e) {
-    // System.out.println("Nose pudo agregar la imagen");
+    // private void colocarImagenPieza() {
+    //     ImageIcon icon = new ImageIcon(Styles.URL_LOGO);
+    //     ImageIcon scaledIcon = new ImageIcon(icon.getImage().getScaledInstance(240, 240, java.awt.Image.SCALE_SMOOTH));
+    //     JLabel logo = new JLabel(scaledIcon);
+    //     logo.setBounds(410, 120, 200, 200);
+    //     add(logo);
     // }
-    // }
+
 
     private JLabel logo = null; // Guardamos una referencia a la imagen
 
@@ -144,18 +127,15 @@ public class EscaneoPinturaPanel extends JPanel {
             if (logo != null) {
                 remove(logo);
             }
-
             String img = nombrePieza;
             URL_Pieza = Styles.class.getResource(img);
             ImageIcon icon = new ImageIcon(URL_Pieza);
             ImageIcon scaledIcon = new ImageIcon(
-                    icon.getImage().getScaledInstance(240, 240, java.awt.Image.SCALE_SMOOTH));
-
+                    icon.getImage().getScaledInstance(240, 260, java.awt.Image.SCALE_SMOOTH));
             // Creamos una nueva JLabel con la imagen
             logo = new JLabel(scaledIcon);
             logo.setBounds(410, 120, 200, 200);
             add(logo);
-
             // Volver a pintar el componente (hacer visible la actualización)
             revalidate();
             repaint();
@@ -187,37 +167,22 @@ public class EscaneoPinturaPanel extends JPanel {
         String precio = piezabl.getPrecioBy(barcode);
         String autor = piezabl.getAutorBy(barcode);
         String descripcion = piezabl.getDescripcionBy(barcode);
-
         String imgPintura = piezabl.getNombreBy(barcode);
         String ubicacion = "/GUI/Resource/Imagenes/" + imgPintura + ".jpg";
-
         nameLabel.setText("Nombre de la Pieza: " + nombre + "\n");
         priceLabel.setText("Precio Replica: " + precio + "\n");
         autroLabel.setText("Autor: " + autor + "\n");
-        descripcionLabel.setText("Descripción: " + descripcion + "\n");
+        descripcionLabel.setText("<html><body>Descripción: " + descripcion.replace("\n", "<br>") + "</body></html>");
+
+        // descripcionLabel.setText("Descripción: " + descripcion + "\n");
+
+        // descripcionArea.setText(descripcion);
+        String desripcionExtraida=descripcionLabel.getText();
+
+
+        System.out.println(desripcionExtraida);
         System.out.println(ubicacion);
         colocarImagenPieza(ubicacion);
-
-        // try {
-        // String nombre = piezabl.getNombreBy(barcode);
-        // String precio = piezabl.getPrecioBy(barcode);
-        // String autor = piezabl.getAutorBy(barcode);
-        // String descripcion = piezabl.getDescripcionBy(barcode);
-
-        // String imgPintura = piezabl.getNombreBy(barcode);
-        // String ubicacion = "/GUI/Resource/Imagenes/" + imgPintura + ".jpg";
-
-        // nameLabel.setText("Nombre de la Pieza: " + nombre + "\n");
-        // priceLabel.setText("Precio Replica: " + precio + "\n");
-        // autroLabel.setText("Autor: " + autor + "\n");
-        // descripcionLabel.setText("Descripción: " + descripcion + "\n");
-        // System.out.println(ubicacion);
-        // colocarImagenPieza(ubicacion);
-        // } catch (Exception e) {
-        // // colocarImagenPieza();
-        // System.out.println("hay un problema en el process bar");
-        // }
-
     }
 
     // Método para dibujar el degradado como fondo
@@ -225,24 +190,19 @@ public class EscaneoPinturaPanel extends JPanel {
     protected void paintComponent(Graphics g) {
         super.paintComponent(g);
         Graphics2D g2d = (Graphics2D) g;
-
         // Definir los puntos de inicio y final del degradado
         Point start = new Point(0, 0);
         Point end = new Point(0, getHeight()); // Degradado vertical
-
         // Colores en formato hexadecimal
         // Color color1 = Color.decode("#BBB49D");
         Color color2 = Color.decode("#9A7787");
         Color color3 = Color.decode("#E4AFB0");
-
         // Posiciones donde cada color debe cambiar (en valores entre 0.0f y 1.0f)
         // float[] fractions = { 0.0f, 0.5f, 1.0f };
         float[] fractions = { 0.3f, 1.0f };
-
         // Crear el degradado con los colores y posiciones definidas
         LinearGradientPaint gradient = new LinearGradientPaint(start, end, fractions,
                 new Color[] { color2, color3 });
-
         // Aplicar el degradado como fondo
         g2d.setPaint(gradient);
         g2d.fillRect(0, 0, getWidth(), getHeight()); // Rellenar el área con el degradado
