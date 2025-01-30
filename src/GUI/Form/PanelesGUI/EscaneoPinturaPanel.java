@@ -117,18 +117,18 @@ public class EscaneoPinturaPanel extends JPanel {
     private URL URL_Pieza;
 
     // private void colocarImagenPieza(String nombrePieza) {
-    //     try {
-    //         String img = nombrePieza;
-    //         URL_Pieza = Styles.class.getResource(img);
-    //         ImageIcon icon = new ImageIcon(URL_Pieza);
-    //         ImageIcon scaledIcon = new ImageIcon(
-    //                 icon.getImage().getScaledInstance(240, 240, java.awt.Image.SCALE_SMOOTH));
-    //         JLabel logo = new JLabel(scaledIcon);
-    //         logo.setBounds(410, 120, 200, 200);
-    //         add(logo);
-    //     } catch (Exception e) {
-    //         System.out.println("Nose pudo agregar la imagen");
-    //     }
+    // try {
+    // String img = nombrePieza;
+    // URL_Pieza = Styles.class.getResource(img);
+    // ImageIcon icon = new ImageIcon(URL_Pieza);
+    // ImageIcon scaledIcon = new ImageIcon(
+    // icon.getImage().getScaledInstance(240, 240, java.awt.Image.SCALE_SMOOTH));
+    // JLabel logo = new JLabel(scaledIcon);
+    // logo.setBounds(410, 120, 200, 200);
+    // add(logo);
+    // } catch (Exception e) {
+    // System.out.println("Nose pudo agregar la imagen");
+    // }
     // }
 
     private JLabel logo = null; // Guardamos una referencia a la imagen
@@ -155,7 +155,7 @@ public class EscaneoPinturaPanel extends JPanel {
             revalidate();
             repaint();
         } catch (Exception e) {
-            colocarImagenPieza();
+            // colocarImagenPieza();
             System.out.println("No se pudo agregar la imagen");
         }
     }
@@ -170,6 +170,8 @@ public class EscaneoPinturaPanel extends JPanel {
                 priceLabel.setText("Vuelva a escanear nuevamente!");
                 autroLabel.setText("Ningún Autor");
                 descripcionLabel.setText(" ... ");
+                String nombrePiezaa = "/GUI/Resource/Imagenes/Fondo1.jpg";
+                colocarImagenPieza(nombrePiezaa);
             }
             barcodeField.setText("");
         }
@@ -190,6 +192,26 @@ public class EscaneoPinturaPanel extends JPanel {
         descripcionLabel.setText("Descripción: " + descripcion + "\n");
         System.out.println(ubicacion);
         colocarImagenPieza(ubicacion);
+
+        // try {
+        //     String nombre = piezabl.getNombreBy(barcode);
+        //     String precio = piezabl.getPrecioBy(barcode);
+        //     String autor = piezabl.getAutorBy(barcode);
+        //     String descripcion = piezabl.getDescripcionBy(barcode);
+
+        //     String imgPintura = piezabl.getNombreBy(barcode);
+        //     String ubicacion = "/GUI/Resource/Imagenes/" + imgPintura + ".jpg";
+
+        //     nameLabel.setText("Nombre de la Pieza: " + nombre + "\n");
+        //     priceLabel.setText("Precio Replica: " + precio + "\n");
+        //     autroLabel.setText("Autor: " + autor + "\n");
+        //     descripcionLabel.setText("Descripción: " + descripcion + "\n");
+        //     System.out.println(ubicacion);
+        //     colocarImagenPieza(ubicacion);
+        // } catch (Exception e) {
+        //     // colocarImagenPieza();
+        //     System.out.println("hay un problema en el process bar");
+        // }
 
     }
 
