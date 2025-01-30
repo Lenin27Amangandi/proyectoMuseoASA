@@ -155,6 +155,7 @@ public class EscaneoPinturaPanel extends JPanel {
             revalidate();
             repaint();
         } catch (Exception e) {
+            colocarImagenPieza();
             System.out.println("No se pudo agregar la imagen");
         }
     }
@@ -169,7 +170,6 @@ public class EscaneoPinturaPanel extends JPanel {
                 priceLabel.setText("Vuelva a escanear nuevamente!");
                 autroLabel.setText("Ningún Autor");
                 descripcionLabel.setText(" ... ");
-                colocarImagenPieza();
             }
             barcodeField.setText("");
         }
