@@ -9,6 +9,7 @@ import java.awt.Graphics2D;
 import java.awt.Image;
 import java.awt.LinearGradientPaint;
 import java.awt.Point;
+import java.net.URL;
 
 import javax.swing.ImageIcon;
 import javax.swing.JFrame;
@@ -94,17 +95,68 @@ public class EscaneoPinturaPanel extends JPanel {
 
         btnHome.addActionListener(e -> showMenuPanel());
 
-        barcodeField.addActionListener(e -> {getBarcode();});
+        barcodeField.addActionListener(e -> {
+            getBarcode();
+        });
 
         SwingUtilities.invokeLater(() -> barcodeField.requestFocusInWindow());
-        
 
+        // colocarImagenPieza();
+
+    }
+
+    private void colocarImagenPieza() {
         ImageIcon icon = new ImageIcon(Styles.URL_LOGO);
         ImageIcon scaledIcon = new ImageIcon(icon.getImage().getScaledInstance(240, 240, java.awt.Image.SCALE_SMOOTH));
         JLabel logo = new JLabel(scaledIcon);
 
         logo.setBounds(410, 120, 200, 200);
         add(logo);
+    }
+
+    private URL URL_Pieza;
+
+    // private void colocarImagenPieza(String nombrePieza) {
+    //     try {
+    //         String img = nombrePieza;
+    //         URL_Pieza = Styles.class.getResource(img);
+    //         ImageIcon icon = new ImageIcon(URL_Pieza);
+    //         ImageIcon scaledIcon = new ImageIcon(
+    //                 icon.getImage().getScaledInstance(240, 240, java.awt.Image.SCALE_SMOOTH));
+    //         JLabel logo = new JLabel(scaledIcon);
+    //         logo.setBounds(410, 120, 200, 200);
+    //         add(logo);
+    //     } catch (Exception e) {
+    //         System.out.println("Nose pudo agregar la imagen");
+    //     }
+    // }
+
+    private JLabel logo = null; // Guardamos una referencia a la imagen
+
+    private void colocarImagenPieza(String nombrePieza) {
+        try {
+            // Si ya hay una imagen, la eliminamos
+            if (logo != null) {
+                remove(logo);
+            }
+
+            String img = nombrePieza;
+            URL_Pieza = Styles.class.getResource(img);
+            ImageIcon icon = new ImageIcon(URL_Pieza);
+            ImageIcon scaledIcon = new ImageIcon(
+                    icon.getImage().getScaledInstance(240, 240, java.awt.Image.SCALE_SMOOTH));
+
+            // Creamos una nueva JLabel con la imagen
+            logo = new JLabel(scaledIcon);
+            logo.setBounds(410, 120, 200, 200);
+            add(logo);
+
+            // Volver a pintar el componente (hacer visible la actualización)
+            revalidate();
+            repaint();
+        } catch (Exception e) {
+            System.out.println("No se pudo agregar la imagen");
+        }
     }
 
     private void getBarcode() {
@@ -117,6 +169,7 @@ public class EscaneoPinturaPanel extends JPanel {
                 priceLabel.setText("Vuelva a escanear nuevamente!");
                 autroLabel.setText("Ningún Autor");
                 descripcionLabel.setText(" ... ");
+                colocarImagenPieza();
             }
             barcodeField.setText("");
         }
@@ -128,10 +181,16 @@ public class EscaneoPinturaPanel extends JPanel {
         String autor = piezabl.getAutorBy(barcode);
         String descripcion = piezabl.getDescripcionBy(barcode);
 
+        String imgPintura = piezabl.getNombreBy(barcode);
+        String ubicacion = "/GUI/Resource/Imagenes/" + imgPintura + ".jpg";
+
         nameLabel.setText("Nombre de la Pieza: " + nombre + "\n");
         priceLabel.setText("Precio Replica: " + precio + "\n");
         autroLabel.setText("Autor: " + autor + "\n");
         descripcionLabel.setText("Descripción: " + descripcion + "\n");
+        System.out.println(ubicacion);
+        colocarImagenPieza(ubicacion);
+
     }
 
     // Método para dibujar el degradado como fondo
@@ -155,7 +214,7 @@ public class EscaneoPinturaPanel extends JPanel {
 
         // Crear el degradado con los colores y posiciones definidas
         LinearGradientPaint gradient = new LinearGradientPaint(start, end, fractions,
-                new Color[] { color2, color3});
+                new Color[] { color2, color3 });
 
         // Aplicar el degradado como fondo
         g2d.setPaint(gradient);
