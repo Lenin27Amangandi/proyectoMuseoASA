@@ -67,7 +67,8 @@ public class MenuPanel extends JPanel {
     private void showEscaneoLogin() {
         JFrame frame = (JFrame) SwingUtilities.getWindowAncestor(this);
         if (frame != null) {
-            frame.setContentPane(new EscaneoLogin(this));
+            // frame.setContentPane(new EscaneoLogin(this));
+            frame.setContentPane(new EscaneoLogin2(this));
             frame.revalidate();
             frame.repaint();
         }

@@ -25,7 +25,7 @@ public class App {
     public static void main(String[] args) throws Exception {
         try {
             // new SplashForm();
-            // new MainForm("Acces Scand Art", true);
+            new MainForm("Acces Scand Art", true);
 
             // // Testeo de conexión a la base de datos SQLite para verificar que la
             // conexión es exitosa

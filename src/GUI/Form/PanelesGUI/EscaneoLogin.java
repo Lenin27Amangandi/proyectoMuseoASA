@@ -74,7 +74,7 @@ public class EscaneoLogin extends JPanel {
             System.out.println("Vamos a login panel de Admin");
         } else {
             showSupervisorTipoPanel(adminTipo);
-            System.out.println("Vamos a login Panel tipo Superviso");
+            System.out.println("Vamos a login Panel tipo Supervisor");
         }
     }
 
