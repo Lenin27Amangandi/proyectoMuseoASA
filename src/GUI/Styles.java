@@ -41,17 +41,17 @@ public abstract class Styles {
     public static final Cursor CURSOR_HAND = new Cursor(Cursor.HAND_CURSOR);
     public static final Cursor CURSOR_DEFAULT = new Cursor(Cursor.DEFAULT_CURSOR);
 
-    // public static final URL URL_FONDO = Styles.class.getResource("/UserInterface/Resources/Img/BGmain.jpg");
     public static final URL URL_FONDO = Styles.class.getResource("/GUI/Resource/Imagenes/Fondo1.jpg");
+    // public static final URL URL_FONDO = Styles.class.getResource("/GUI/Resource/Imagenes/InicioImage.jpg");
+    public static final URL URL_FONDO_GENERAL= Styles.class.getResource("/GUI/Resource/Imagenes/InicioAdmin.png");
+    public static final URL URL_SPLASH = Styles.class.getResource("/UserInterface/Resources/Img/LogoEA.jpg");
 
-    
-    public static final URL URL_FONDO_GENERAL= Styles.class.getResource("/UserInterface/Resources/Img/BG.jpg");
+
     public static final URL URL_BOTON = Styles.class.getResource("/UserInterface/Resources/Img/Button.png");
     public static final URL URL_MAIN = Styles.class.getResource("/UserInterface/Resources/Img/EATypo.png");
     public static final URL URL_LOGO = Styles.class.getResource("/GUI/Resource/Imagenes/logoSplash.jpg");//Listo
 
 
-    public static final URL URL_SPLASH = Styles.class.getResource("/UserInterface/Resources/Img/LogoEA.jpg");
 
     public static final CompoundBorder createBorderRect() {
         return BorderFactory.createCompoundBorder(new LineBorder(Color.lightGray),
