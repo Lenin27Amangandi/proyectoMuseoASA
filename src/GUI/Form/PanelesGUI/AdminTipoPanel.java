@@ -69,7 +69,8 @@ public class AdminTipoPanel extends JPanel {
     private void showAddAdminPanel() {
         JFrame frame = (JFrame) SwingUtilities.getWindowAncestor(this);
         if (frame != null) {
-            frame.setContentPane(new AddAdminPanel(this));
+            // frame.setContentPane(new AddAdminPanel(this));
+            frame.setContentPane(new AddAdmin2Panel(this));
             frame.revalidate();
             frame.repaint();
         }

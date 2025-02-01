@@ -420,6 +420,5 @@ public class AddPiezaPanel extends JPanel {
             frame.revalidate();
             frame.repaint();
         }
-
     }
 }
