@@ -1,15 +1,18 @@
 import java.nio.channels.Pipe.SourceChannel;
 
+import BusinessLogic.Administrador2BL;
 import BusinessLogic.AdministradorBL;
 import BusinessLogic.CategoriaBL;
 import BusinessLogic.PiezaDeArteBL;
 import BusinessLogic.SeccionBL;
 import DataAcces.SQLiteDataHelper;
+import DataAcces.DAO.Administrador2DAO;
 import DataAcces.DAO.AdministradorDAO;
 import DataAcces.DAO.AdministradorTipoDAO;
 import DataAcces.DAO.CategoriaDAO;
 import DataAcces.DAO.PiezaDeArteDAO;
 import DataAcces.DAO.SeccionDAO;
+import DataAcces.DTO.Administrador2DTO;
 import DataAcces.DTO.AdministradorDTO;
 import DataAcces.DTO.AdministradorTipoDTO;
 import DataAcces.DTO.CategoriaDTO;
@@ -22,7 +25,7 @@ public class App {
     public static void main(String[] args) throws Exception {
         try {
             // new SplashForm();
-            new MainForm("Acces Scand Art", true);
+            // new MainForm("Acces Scand Art", true);
 
             // // Testeo de conexión a la base de datos SQLite para verificar que la
             // conexión es exitosa
@@ -98,7 +101,7 @@ public class App {
             // Integer maxRow4 = dao4.getMaxRow();
             // System.out.println("Número máximo de filas: " + maxRow4);
 
-            // //Testeo de Dao Administrador
+            // // Testeo de Dao Administrador
             // System.out.println();
             // System.out.println("- ".repeat(25));
             // AdministradorDAO dao5 = new AdministradorDAO();
@@ -108,14 +111,45 @@ public class App {
             // System.out.println(admin.toString());
             // }
             // dao5.delete("1234567890123");
-            // Testeo para el read by Exitoso
+            // // Testeo para el read by Exitoso
             // System.out.println("- ".repeat(25));
             // System.out.println(dao5.readBy("1753193828123"));
-
             // // Testeo para el getMaxRow AdministradorTipo
             // System.out.println("- ".repeat(25));
             // Integer maxRow5 = dao5.getMaxRow();
             // System.out.println("Número máximo de filas: " + maxRow5);
+
+            // // System.out.println();
+            // // System.out.println("- ".repeat(25));
+            // // Administrador2DAO dao5_5 = new Administrador2DAO();
+
+            // // dao5_5.delete("1034567890111");
+            // // dao5_5.delete("1004567890111");
+
+            
+            // // // Testeo para el readAll Exitoso para Admin2            // Testeo para el readAll Exitoso para Admin2
+            // // for (Administrador2DTO admin : dao5_5.readAll()) {
+            // //     System.out.println(admin.toString());
+            // // }
+            // // System.out.println("- ".repeat(25));
+
+            // // Testeo para el read by Exitoso para Admin2
+            // Integer maxRow5 = dao5_5.getMaxRow();
+            // System.out.println("Número máximo de filas: " + maxRow5);
+
+            // // Testeo para el read by Exitoso para Admin2
+            // System.out.println("- ".repeat(25));
+            // System.out.println(dao5_5.readBy("1234567890111"));
+
+            // // //Testeo de create Administrador2 desde el dao
+            // // dao5_5.create(new Administrador2DTO("1034567890111", "Ramdon", "Floyd",1));
+            // // // Funciona
+            // // dao5_5.create(new Administrador2DTO("1004567890111", "Driam", "Lex",2)); //
+            // // //Funciona
+
+            // System.out.println(dao5_5.readBy("1034567890111"));
+            // System.out.println(dao5_5.readBy("1004567890111"));
+
 
             // // Testing BL Categoria
             // CategoriaBL categoriaBL = new CategoriaBL();
@@ -144,7 +178,15 @@ public class App {
             // // // adminBL.add(new AdministradorDTO("1234657891212", 2));
             // System.out.println(adminBL.getAll());
 
-            //
+            // Administrador2BL admini2Bl = new Administrador2BL();
+            // // Llamamos al método y mostramos el resultado
+            // boolean esAdmin = admini2Bl.tipoAdminByUsuarioYContrasenia("lenin", "lenin123");
+            // boolean esAdmin2 = admini2Bl.tipoAdminByUsuarioYContrasenia("andi", "andi123");
+            // System.out.println("¿Es administrador? " + esAdmin);
+            // System.out.println("¿Es administrador? " + esAdmin2);
+            
+
+
         } catch (Exception e) {
             throw e;
         }

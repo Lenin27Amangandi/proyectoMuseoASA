@@ -29,9 +29,9 @@ public abstract class Styles {
     public static final Color COLOR_FOREGROUND_PRESSED = new Color(0xBD9402);
 
 
-    public static final Font FONT = new Font("Inconsolata", Font.PLAIN, 14);
+    public static final Font FONT = new Font("Arial", Font.PLAIN, 14);
     public static final Font FONT_BOLD = new Font("Inconsolata", Font.BOLD | Font.PLAIN, 14);
-    public static final Font FONT_BOLD_20 = new Font("Inconsolata", Font.BOLD| Font.PLAIN, 20);
+    public static final Font FONT_BOLD_20 = new Font("Arial", Font.BOLD| Font.PLAIN, 24);
     public static final Font FONT_SMALL = new Font("Inconsolata", Font.PLAIN | Font.PLAIN, 10);
 
     public static final int ALIGNMENT_LEFT = SwingConstants.LEFT;
