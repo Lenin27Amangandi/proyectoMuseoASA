@@ -224,6 +224,184 @@ public class AddAdmin2Panel extends JPanel {
 
     }
 
+    LogInPanel addLoginPanel;
+
+    public AddAdmin2Panel(LogInPanel addLoginPanel) {
+
+        this.addLoginPanel = addLoginPanel;
+        btnBack = new PrjButton("Volver");
+        btnADD = new PrjButton("Nuevo");
+        btnMOD = new PrjButton("Editar");
+        btnDEL = new PrjButton("Eliminar");
+        btnDEL.setForeground(Styles.COLOR_FONT);
+        btnADD.setForeground(Styles.COLOR_FONT);
+        btnMOD.setForeground(Styles.COLOR_FONT);
+        messageLabel = new PrjLabel();
+
+        barcodeField = new PrjTextBox();
+        barcodeField.setPreferredSize(new Dimension(200, 30));
+        barcodeField.setBackground(Styles.COLOR_FONT_LIGHT);
+
+        usuarioField = new PrjTextBox();
+        usuarioField.setPreferredSize(new Dimension(200, 30));
+        usuarioField.setBackground(Styles.COLOR_FONT_LIGHT);
+
+        contraseniaField = new PrjTextBox();
+        contraseniaField.setPreferredSize(new Dimension(200, 30));
+        contraseniaField.setBackground(Styles.COLOR_FONT_LIGHT);
+
+        tipoAdminField = new PrjTextBox();
+        tipoAdminField.setPreferredSize(new Dimension(300, 400));
+        tipoAdminField.setBackground(Styles.COLOR_FONT_LIGHT);
+
+        setLayout(new BorderLayout());
+
+        btnBack.addActionListener(e -> showLoginPanel());
+        btnADD.addActionListener(e -> {
+            btnADD.setForeground(Styles.COLOR_FONT);
+            btnMOD.setForeground(Styles.COLOR_FONT_BG);
+            btnDEL.setForeground(Styles.COLOR_FONT_BG);
+            try {
+                addProduct();
+            } catch (Exception ex) {
+                messageLabel.setText("Ups... No se pudo agregar el producto");
+                ex.printStackTrace();
+            }
+        });
+
+        btnDEL.addActionListener(e -> {
+            btnDEL.setForeground(Styles.COLOR_FONT);
+            btnMOD.setForeground(Styles.COLOR_FONT_BG);
+            btnADD.setForeground(Styles.COLOR_FONT_BG);
+            try {
+                deleteProduct();
+            } catch (Exception ex) {
+                messageLabel.setText("Ups... No se pudo eliminar el producto");
+                ex.printStackTrace();
+            }
+        });
+
+        btnMOD.addActionListener(e -> {
+            btnMOD.setForeground(Styles.COLOR_FONT);
+            btnDEL.setForeground(Styles.COLOR_FONT_BG);
+            btnADD.setForeground(Styles.COLOR_FONT_BG);
+            try {
+                editAdmin();
+            } catch (Exception ex) {
+                messageLabel.setText("Ups... No se pudo editar el producto");
+                ex.printStackTrace();
+            }
+        });
+
+        tableModel = new DefaultTableModel() {
+            @Override
+            public boolean isCellEditable(int row, int column) {
+                return false; // La celda no es editable
+            }
+        };
+
+        tableModel.addColumn("Barcode");
+        tableModel.addColumn("Usuario");
+        tableModel.addColumn("Contrasenia");
+        tableModel.addColumn("TipoAdmin");
+
+        administradorTable = new JTable(tableModel);
+        administradorTable.setPreferredScrollableViewportSize(new Dimension(500, 300));
+        administradorTable.setSelectionForeground(Styles.COLOR_FOREGROUND);
+        administradorTable.addMouseListener(new MouseAdapter() {
+            @Override
+            public void mouseClicked(MouseEvent e) {
+                if (e.getClickCount() == 1) {
+                    int selectedRow = administradorTable.getSelectedRow();
+                    if (selectedRow != -1) {
+                        String barcode = (String) tableModel.getValueAt(selectedRow, 0);
+                        String usuario = (String) tableModel.getValueAt(selectedRow, 1);
+                        String contrasaenia = (String) tableModel.getValueAt(selectedRow, 2);
+                        int tipoAdmin = (int) tableModel.getValueAt(selectedRow, 3);
+
+                        barcodeField.setText(barcode);
+                        usuarioField.setText(usuario);
+                        contraseniaField.setText(contrasaenia);
+                        tipoAdminField.setText(String.valueOf(tipoAdmin));
+                    }
+                }
+            }
+        });
+
+        administradorTable.setFillsViewportHeight(true);
+        // Agregar la tabla a un JScrollPane
+        JScrollPane tableScrollPane = new JScrollPane(administradorTable);
+
+        // Agregar el JScrollPane al panel
+        add(tableScrollPane, BorderLayout.WEST); // Ponerlo al este
+
+        // Cargar los datos de la base de datos en la tabla
+        loadAdministradoresFromDatabase();
+
+        JPanel northPanel = new JPanel();
+        northPanel = paintPanel(northPanel);
+        northPanel.setLayout(new FlowLayout());
+        // ...
+
+        JPanel centerPanel = new JPanel();
+        centerPanel.setLayout(new GridBagLayout());
+        centerPanel = paintPanel(centerPanel);
+        GridBagConstraints gbc = new GridBagConstraints();
+
+        gbc.insets = new Insets(5, 5, 5, 5); // Espaciado
+        gbc.fill = GridBagConstraints.HORIZONTAL;
+
+        // Código de barras
+        gbc.gridx = 0;
+        gbc.gridy = 0;
+        centerPanel.add(new JLabel("Código de Barras:"), gbc);
+        gbc.gridy = 1;
+        centerPanel.add(barcodeField, gbc);
+
+        // Nombre
+        gbc.gridy = 2;
+        centerPanel.add(new JLabel("Usuario:"), gbc);
+        gbc.gridy = 3;
+        centerPanel.add(usuarioField, gbc);
+
+        // Contrasenia
+        gbc.gridy = 4;
+        centerPanel.add(new JLabel("Contrasenia:"), gbc);
+        gbc.gridy = 5;
+        centerPanel.add(contraseniaField, gbc);
+
+        // tipoAdmin
+        gbc.gridy = 6;
+        centerPanel.add(new JLabel("TipoAdmin:"), gbc);
+        gbc.gridy = 7;
+        centerPanel.add(tipoAdminField, gbc);
+
+        JPanel southPanel = new JPanel();
+        southPanel.setLayout(new FlowLayout());
+
+        // JPanel southPanel = new JPanel();
+        southPanel.setLayout(new FlowLayout(FlowLayout.CENTER));
+
+        // Agregar los botones al panel sur
+        southPanel.add(btnADD);
+        southPanel.add(btnMOD);
+        southPanel.add(btnDEL);
+        southPanel.add(btnBack);
+        southPanel.add(messageLabel);
+
+        add(southPanel, BorderLayout.SOUTH);
+
+        add(centerPanel, BorderLayout.CENTER);
+
+        southPanel.add(btnBack);
+        southPanel.add(messageLabel);
+        add(southPanel, BorderLayout.SOUTH);
+
+        SwingUtilities.invokeLater(() -> barcodeField.requestFocusInWindow());
+    
+
+    }
+
     private void deleteProduct() {
         int selectedRow = administradorTable.getSelectedRow();
         if (selectedRow != -1) {
@@ -328,6 +506,15 @@ public class AddAdmin2Panel extends JPanel {
     private JPanel paintPanel(JPanel panel) {
         panel.setBackground(Styles.COLOR_BACKGROUND);
         return panel;
+    }
+
+    private void showLoginPanel() {
+        JFrame frame = (JFrame) SwingUtilities.getWindowAncestor(this);
+        if (frame != null) {
+            frame.setContentPane(addLoginPanel);
+            frame.revalidate();
+            frame.repaint();
+        }
     }
 
 

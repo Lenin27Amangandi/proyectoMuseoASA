@@ -105,13 +105,12 @@ public class EscaneoLogin2 extends JPanel {
 
     private void processBarcode(String barcode) throws Exception {
         boolean adminTipo = administradorbl.tipoAdmin2(barcode);
-        // if (adminTipo == true) {
         if (adminTipo == false) {
-            showLoginPanel();
-            System.out.println("Vamos a login panel de Admin");
+            AddPiezaPanel();
+            System.out.println("Vamos a login panel de Pintura con barcode");
         } else {
             showSupervisorTipoPanel(adminTipo);
-            System.out.println("Vamos a login Panel tipo Supervisor");
+            System.out.println("Vamos a login Panel tipo Administrador para pinturas y supervisores ");
         }
     }
 
@@ -126,17 +125,16 @@ public class EscaneoLogin2 extends JPanel {
     
         try {
             boolean adminTipo = administradorbl.tipoAdminByUsuarioYContrasenia(usuario, contrasenia);
-            
             if (!adminTipo) {
-                showLoginPanel();
-                System.out.println("Vamos a login panel de Admin");
+                AddPiezaPanel();
+                System.out.println("Vamos a login panel de Pintura con login");
             } else {
                 showSupervisorTipoPanel(adminTipo);
-                System.out.println("Vamos a login Panel tipo Supervisor");
+                System.out.println("Vamos a login Panel tipo Administrador para pinturas y supervisores");
             }
         } catch (Exception ex) {
             JOptionPane.showMessageDialog(this, "Error al validar credenciales: " + ex.getMessage(), "Error", JOptionPane.ERROR_MESSAGE);
-            ex.printStackTrace(); // Para depuración
+            ex.printStackTrace();
         }
     }
     
@@ -150,14 +148,15 @@ public class EscaneoLogin2 extends JPanel {
         }
     }
 
-    private void showLoginPanel() {
+    private void AddPiezaPanel() {
         JFrame frame = (JFrame) SwingUtilities.getWindowAncestor(this);
         if (frame != null) {
-            frame.setContentPane(new LogInPanel(menuPanel));
+            frame.setContentPane(new AddPiezaPanel(this));  // Asegúrate de tener un panel llamado Login2Panel
             frame.revalidate();
             frame.repaint();
         }
     }
+    
 
     private void showMenuPanel() {
         JFrame frame = (JFrame) SwingUtilities.getWindowAncestor(this);
